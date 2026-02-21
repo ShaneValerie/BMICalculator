@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BMICalculator.MainPage"
+             BackgroundColor="#eeeef7">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20,50,20,30" Spacing="16">
+
+            <Label Text="BMI CALCULATOR" FontSize="16" FontAttributes="Bold"
+                   HorizontalOptions="Center" TextColor="#1a1a6e" CharacterSpacing="2"
+                   Margin="0,0,0,8"/>
+
+            <VerticalStackLayout x:Name="InputPage" Spacing="16">
+
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="14">
+
+                    <Border Grid.Column="0" BackgroundColor="White"
+                            StrokeShape="RoundRectangle 20" Stroke="Transparent"
+                            Padding="16,20">
+                        <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
+                            <Label Text="Age" FontSize="14" TextColor="#9090b0"
+                                   HorizontalOptions="Center"/>
+                            <Label x:Name="AgeLabel" Text="0" FontSize="42"
+                                   FontAttributes="Bold" TextColor="#4040cc"
+                                   HorizontalOptions="Center"/>
+                            <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                                <Button Grid.Column="0" Text="−" FontSize="22"
+                                        BackgroundColor="#1a1a6e" TextColor="White"
+                                        CornerRadius="22" HeightRequest="44" WidthRequest="44"
+                                        Clicked="OnAgeDecrement" HorizontalOptions="Center"/>
+                                <Button Grid.Column="1" Text="+" FontSize="22"
+                                        BackgroundColor="#1a1a6e" TextColor="White"
+                                        CornerRadius="22" HeightRequest="44" WidthRequest="44"
+                                        Clicked="OnAgeIncrement" HorizontalOptions="Center"/>
+                            </Grid>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border Grid.Column="1" BackgroundColor="White"
+                            StrokeShape="RoundRectangle 20" Stroke="Transparent"
+                            Padding="16,20">
+                        <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
+                            <Label x:Name="WeightUnitLabel" Text="Weight (KG)" FontSize="14"
+                                   TextColor="#9090b0" HorizontalOptions="Center"/>
+                            <Label x:Name="WeightLabel" Text="0" FontSize="42"
+                                   FontAttributes="Bold" TextColor="#4040cc"
+                                   HorizontalOptions="Center"/>
+                            <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                                <Button Grid.Column="0" Text="−" FontSize="22"
+                                        BackgroundColor="#1a1a6e" TextColor="White"
+                                        CornerRadius="22" HeightRequest="44" WidthRequest="44"
+                                        Clicked="OnWeightDecrement" HorizontalOptions="Center"/>
+                                <Button Grid.Column="1" Text="+" FontSize="22"
+                                        BackgroundColor="#1a1a6e" TextColor="White"
+                                        CornerRadius="22" HeightRequest="44" WidthRequest="44"
+                                        Clicked="OnWeightIncrement" HorizontalOptions="Center"/>
+                            </Grid>
+                        </VerticalStackLayout>
+                    </Border>
+                </Grid>
+
+                <Border BackgroundColor="White" StrokeShape="RoundRectangle 20"
+                        Stroke="Transparent" Padding="20">
+                    <VerticalStackLayout Spacing="8">
+                        <Label x:Name="HeightUnitLabel" Text="Height (CM)" FontSize="14"
+                               TextColor="#9090b0" HorizontalOptions="Center"/>
+                        <Label x:Name="HeightLabel" Text="50" FontSize="42"
+                               FontAttributes="Bold" TextColor="#4040cc"
+                               HorizontalOptions="Center"/>
+                        <Slider x:Name="HeightSlider" Minimum="50" Maximum="300"
+                                Value="50" ThumbColor="#6060e0"
+                                MinimumTrackColor="#6060e0" MaximumTrackColor="#c8c8e8"
+                                ValueChanged="OnHeightChanged" Margin="0,4"/>
+                        <Grid ColumnDefinitions="*,*">
+                            <Label Grid.Column="0" Text="50 cm" FontSize="11" TextColor="#9090b0"/>
+                            <Label Grid.Column="1" Text="300 cm" FontSize="11"
+                                   TextColor="#9090b0" HorizontalOptions="End"/>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border BackgroundColor="White" StrokeShape="RoundRectangle 20"
+                        Stroke="Transparent" Padding="20,18">
+                    <VerticalStackLayout Spacing="14">
+                        <Label Text="Gender" FontSize="14" TextColor="#9090b0"
+                               HorizontalOptions="Center"/>
+
+                        <Grid ColumnDefinitions="*,Auto,*" HorizontalOptions="Center"
+                              WidthRequest="240">
+                            <Label x:Name="MaleLabel" Grid.Column="0" Text="Male"
+                                   FontSize="16" TextColor="#1a1a6e" FontAttributes="Bold"
+                                   HorizontalOptions="End" VerticalOptions="Center"
+                                   Margin="0,0,12,0"/>
+                            <Button Grid.Column="1" x:Name="GenderToggleButton"
+                                    Text="" WidthRequest="56" HeightRequest="32"
+                                    CornerRadius="16" BackgroundColor="#d0d0f0"
+                                    Clicked="OnGenderToggle" Padding="0"/>
+                            <Label x:Name="FemaleLabel" Grid.Column="2" Text="Female"
+                                   FontSize="16" TextColor="#9090b0"
+                                   HorizontalOptions="Start" VerticalOptions="Center"
+                                   Margin="12,0,0,0"/>
+                        </Grid>
+
+                        <Label x:Name="GenderValueLabel" Text="Male" FontSize="13"
+                               TextColor="#6060e0" FontAttributes="Bold"
+                               HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="14">
+                    <Border Grid.Column="0" BackgroundColor="White"
+                            StrokeShape="RoundRectangle 14" Stroke="Transparent" Padding="4">
+                        <Picker x:Name="WeightUnitPicker" TextColor="#1a1a6e"
+                                TitleColor="#9090b0" Title="Weight Unit"
+                                SelectedIndexChanged="OnWeightUnitChanged">
+                            <Picker.Items>
+                                <x:String>kg</x:String>
+                                <x:String>lb</x:String>
+                            </Picker.Items>
+                        </Picker>
+                    </Border>
+                    <Border Grid.Column="1" BackgroundColor="White"
+                            StrokeShape="RoundRectangle 14" Stroke="Transparent" Padding="4">
+                        <Picker x:Name="HeightUnitPicker" TextColor="#1a1a6e"
+                                TitleColor="#9090b0" Title="Height Unit"
+                                SelectedIndexChanged="OnHeightUnitChanged">
+                            <Picker.Items>
+                                <x:String>cm</x:String>
+                                <x:String>ft / in</x:String>
+                            </Picker.Items>
+                        </Picker>
+                    </Border>
+                </Grid>
+
+                <Button Text="Calculate BMI" Clicked="OnCalculateClicked"
+                        BackgroundColor="#6060e0" TextColor="White"
+                        FontSize="17" FontAttributes="Bold"
+                        CornerRadius="30" HeightRequest="58"
+                        Margin="0,8,0,0"/>
+
+            </VerticalStackLayout>
+
+            <VerticalStackLayout x:Name="ResultsPage" IsVisible="False" Spacing="16">
+
+                <Label Text="Body Mass Index" FontSize="26" FontAttributes="Bold"
+                       TextColor="#1a1a6e" HorizontalOptions="Center"
+                       Margin="0,8,0,0"/>
+
+                <Border BackgroundColor="White" StrokeShape="RoundRectangle 20"
+                        Stroke="Transparent" Padding="30">
+                    <VerticalStackLayout Spacing="12" HorizontalOptions="Center">
+
+                        <Label Text="BMI Results" FontSize="20" FontAttributes="Bold"
+                               TextColor="#1a1a6e" HorizontalOptions="Center"/>
+
+                        <Grid ColumnDefinitions="Auto,Auto" HorizontalOptions="Center">
+                            <Label x:Name="BmiWhole" Grid.Column="0" Text="--"
+                                   FontSize="80" FontAttributes="Bold"
+                                   TextColor="#4040cc" VerticalOptions="End"/>
+                            <Label x:Name="BmiDecimal" Grid.Column="1" Text=""
+                                   FontSize="36" FontAttributes="Bold"
+                                   TextColor="#4040cc" VerticalOptions="End"
+                                   Margin="0,0,0,12"/>
+                        </Grid>
+
+                        <Label x:Name="CategoryLabel" Text="" FontSize="17"
+                               FontAttributes="Bold" TextColor="#4040cc"
+                               HorizontalOptions="Center" CharacterSpacing="1"/>
+
+                        <BoxView HeightRequest="1" Color="#e0e0f0" Margin="0,8"/>
+
+                        <Label Text="Underweight: BMI less than 18.5" FontSize="12"
+                               TextColor="#9090b0" HorizontalOptions="Center"/>
+                        <Label Text="Normal weight: BMI 18.5 to 24.9" FontSize="12"
+                               TextColor="#9090b0" HorizontalOptions="Center"/>
+                        <Label Text="Overweight: BMI 25 to 29.9" FontSize="12"
+                               TextColor="#9090b0" HorizontalOptions="Center"/>
+                        <Label Text="Obesity: 30 to 40" FontSize="12"
+                               TextColor="#9090b0" HorizontalOptions="Center"/>
+
+                    </VerticalStackLayout>
+                </Border>
+
+                <Button Text="Recalculate" Clicked="OnRecalculateClicked"
+                        BackgroundColor="#6060e0" TextColor="White"
+                        FontSize="17" FontAttributes="Bold"
+                        CornerRadius="30" HeightRequest="58"
+                        Margin="0,8,0,0"/>
+
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
