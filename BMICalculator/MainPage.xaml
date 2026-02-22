@@ -1,4 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
+    <!-- hi val gi ilis lng nako ang pag input -->
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BMICalculator.MainPage"
@@ -7,7 +8,6 @@
     <ScrollView>
         <VerticalStackLayout Padding="20,50,20,30" Spacing="18">
 
-            <!-- TITLE -->
             <Label Text="BMI CALCULATOR"
                    FontSize="18"
                    FontAttributes="Bold"
@@ -15,13 +15,13 @@
                    TextColor="#3B4CCA"
                    CharacterSpacing="2"/>
 
-            <!-- INPUT PAGE -->
+            <!-- main page -->
             <VerticalStackLayout x:Name="InputPage" Spacing="18">
 
-                <!-- AGE + WEIGHT -->
+               
                 <Grid ColumnDefinitions="*,*" ColumnSpacing="14">
 
-                    <!-- AGE -->
+                    <!-- age -->
                     <Border BackgroundColor="White"
                             StrokeShape="RoundRectangle 20"
                             Padding="20">
@@ -40,7 +40,7 @@
                         </VerticalStackLayout>
                     </Border>
 
-                    <!-- WEIGHT -->
+                    <!-- weight-->
                     <Border Grid.Column="1"
                             BackgroundColor="White"
                             StrokeShape="RoundRectangle 20"
@@ -63,7 +63,7 @@
 
                 </Grid>
 
-                <!-- HEIGHT -->
+                <!-- height -->
                 <Border BackgroundColor="White"
                         StrokeShape="RoundRectangle 20"
                         Padding="20">
@@ -101,7 +101,7 @@
                     </VerticalStackLayout>
                 </Border>
 
-                <!-- GENDER -->
+                <!-- gneder -->
                 <Border BackgroundColor="White"
                         StrokeShape="RoundRectangle 20"
                         Padding="20">
@@ -124,7 +124,7 @@
                     </VerticalStackLayout>
                 </Border>
 
-                <!-- UNITS -->
+                <!-- units-->
                 <Grid ColumnDefinitions="*,*" ColumnSpacing="14">
 
                     <Picker x:Name="WeightUnitPicker"
@@ -159,7 +159,7 @@
 
             </VerticalStackLayout>
 
-            <!-- RESULTS PAGE -->
+            <!-- results page -->
             <VerticalStackLayout x:Name="ResultsPage"
                                  IsVisible="False"
                                  Spacing="18">
