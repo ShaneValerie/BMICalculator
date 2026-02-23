@@ -34,8 +34,21 @@ public partial class MainPage : ContentPage
 
     private void OnHeightChanged(object? sender, ValueChangedEventArgs e)
     {
-        _heightCm = _heightInFeet ? e.NewValue * 2.54 : e.NewValue;
-        HeightLabel.Text = _heightCm.ToString("F1");
+        if (_heightInFeet)
+        {
+            double totalInches = e.NewValue;
+            _heightCm = totalInches * 2.54;
+
+            int feet = (int)(totalInches / 12);
+            int inches = (int)(totalInches % 12);
+
+            HeightLabel.Text = $"{feet} ft {inches} in";
+        }
+        else
+        {
+            _heightCm = e.NewValue;
+            HeightLabel.Text = $"{_heightCm:F1} cm";
+        }
     }
 
     private void OnGenderToggle(object? sender, EventArgs e)
@@ -63,7 +76,29 @@ public partial class MainPage : ContentPage
     private void OnHeightUnitChanged(object? sender, EventArgs e)
     {
         _heightInFeet = HeightUnitPicker.SelectedIndex == 1;
-        HeightUnitLabel.Text = _heightInFeet ? "Height (ft/in)" : "Height (CM)";
+
+        if (_heightInFeet)
+        {
+            // convert current cm to inches
+            double inches = _heightCm / 2.54;
+
+            HeightSlider.Minimum = 20;   // ~1 ft 8 in
+            HeightSlider.Maximum = 90;   // ~7 ft 6 in
+            HeightSlider.Value = inches;
+
+            HeightUnitLabel.Text = "Height (ft/in)";
+        }
+        else
+        {
+            // convert inches back to cm
+            double cm = HeightSlider.Value * 2.54;
+
+            HeightSlider.Minimum = 50;
+            HeightSlider.Maximum = 220;
+            HeightSlider.Value = cm;
+
+            HeightUnitLabel.Text = "Height (CM)";
+        }
     }
 
     private async void OnCalculateClicked(object? sender, EventArgs e)
