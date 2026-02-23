@@ -15,16 +15,13 @@
                    TextColor="#3B4CCA"
                    CharacterSpacing="2"/>
 
-            <!-- main page -->
             <VerticalStackLayout x:Name="InputPage" Spacing="18">
 
                
                 <Grid ColumnDefinitions="*,*" ColumnSpacing="14">
-
-                    <!-- age -->
                     <Border BackgroundColor="White"
-                            StrokeShape="RoundRectangle 20"
-                            Padding="20">
+                                    StrokeShape="RoundRectangle 20"
+                                    Padding="20">
 
                         <VerticalStackLayout Spacing="10">
                             <Label Text="Age"
@@ -40,7 +37,7 @@
                         </VerticalStackLayout>
                     </Border>
 
-                    <!-- weight-->
+                    
                     <Border Grid.Column="1"
                             BackgroundColor="White"
                             StrokeShape="RoundRectangle 20"
@@ -63,7 +60,7 @@
 
                 </Grid>
 
-                <!-- height -->
+             
                 <Border BackgroundColor="White"
                         StrokeShape="RoundRectangle 20"
                         Padding="20">
@@ -101,7 +98,7 @@
                     </VerticalStackLayout>
                 </Border>
 
-                <!-- gneder -->
+                
                 <Border BackgroundColor="White"
                         StrokeShape="RoundRectangle 20"
                         Padding="20">
@@ -124,7 +121,7 @@
                     </VerticalStackLayout>
                 </Border>
 
-                <!-- units-->
+                
                 <Grid ColumnDefinitions="*,*" ColumnSpacing="14">
 
                     <Picker x:Name="WeightUnitPicker"
@@ -159,7 +156,7 @@
 
             </VerticalStackLayout>
 
-            <!-- results page -->
+         
             <VerticalStackLayout x:Name="ResultsPage"
                                  IsVisible="False"
                                  Spacing="18">
