@@ -4,7 +4,7 @@ public partial class MainPage : ContentPage
 {
     private int _age;
     private double _weightKg;
-    private double _heightCm = 50;
+    private double _heightCm = 170; 
     private bool _isFemale;
     private bool _weightInLbs;
     private bool _heightInFeet;
@@ -12,24 +12,24 @@ public partial class MainPage : ContentPage
     public MainPage()
     {
         InitializeComponent();
+
         WeightUnitPicker.SelectedIndex = 0;
         HeightUnitPicker.SelectedIndex = 0;
+
+        HeightSlider.Value = _heightCm;
+        HeightLabel.Text = $"{_heightCm:F0} cm";
     }
 
     private void OnAgeTextChanged(object? sender, TextChangedEventArgs e)
     {
         if (int.TryParse(e.NewTextValue, out int age))
-        {
             _age = age;
-        }
     }
 
     private void OnWeightTextChanged(object? sender, TextChangedEventArgs e)
     {
         if (double.TryParse(e.NewTextValue, out double value))
-        {
             _weightKg = _weightInLbs ? value * 0.453592 : value;
-        }
     }
 
     private void OnHeightChanged(object? sender, ValueChangedEventArgs e)
@@ -47,10 +47,9 @@ public partial class MainPage : ContentPage
         else
         {
             _heightCm = e.NewValue;
-            HeightLabel.Text = $"{_heightCm:F1} cm";
+            HeightLabel.Text = $"{_heightCm:F1} cm"; // 👈 1 decimal
         }
     }
-
     private void OnGenderToggle(object? sender, EventArgs e)
     {
         _isFemale = !_isFemale;
@@ -79,23 +78,19 @@ public partial class MainPage : ContentPage
 
         if (_heightInFeet)
         {
-           
             double inches = _heightCm / 2.54;
 
-            HeightSlider.Minimum = 20;   
-            HeightSlider.Maximum = 90;   
+            HeightSlider.Minimum = 36;  // 3 ft
+            HeightSlider.Maximum = 90;  // 7.5 ft
             HeightSlider.Value = inches;
 
             HeightUnitLabel.Text = "Height (ft/in)";
         }
         else
         {
-          
-            double cm = HeightSlider.Value * 2.54;
-
-            HeightSlider.Minimum = 50;
+            HeightSlider.Minimum = 120;
             HeightSlider.Maximum = 220;
-            HeightSlider.Value = cm;
+            HeightSlider.Value = _heightCm;
 
             HeightUnitLabel.Text = "Height (CM)";
         }
@@ -105,17 +100,21 @@ public partial class MainPage : ContentPage
     {
         if (_age <= 0)
         {
-            await DisplayAlertAsync("Missing Info", "Enter your age.", "OK");
+            await DisplayAlert("Missing Info", "Enter your age.", "OK");
             return;
         }
 
         if (_weightKg <= 0)
         {
-            await DisplayAlertAsync("Missing Info", "Enter your weight.", "OK");
+            await DisplayAlert("Missing Info", "Enter your weight.", "OK");
             return;
         }
 
         double heightMeters = _heightCm / 100;
+
+        if (heightMeters <= 0)
+            return;
+
         double bmi = _weightKg / (heightMeters * heightMeters);
 
         BmiWhole.Text = bmi.ToString("F1");
