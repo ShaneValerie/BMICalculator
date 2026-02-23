@@ -79,18 +79,18 @@ public partial class MainPage : ContentPage
 
         if (_heightInFeet)
         {
-            // convert current cm to inches
+           
             double inches = _heightCm / 2.54;
 
-            HeightSlider.Minimum = 20;   // ~1 ft 8 in
-            HeightSlider.Maximum = 90;   // ~7 ft 6 in
+            HeightSlider.Minimum = 20;   
+            HeightSlider.Maximum = 90;   
             HeightSlider.Value = inches;
 
             HeightUnitLabel.Text = "Height (ft/in)";
         }
         else
         {
-            // convert inches back to cm
+          
             double cm = HeightSlider.Value * 2.54;
 
             HeightSlider.Minimum = 50;
